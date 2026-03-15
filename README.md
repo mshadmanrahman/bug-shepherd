@@ -16,32 +16,123 @@ Built by a PM who triaged 240+ bugs across 28 locales without writing a single l
 | `/shepherd-review` | Quality gate before pushing a fix | Developer |
 | `/shepherd-learn` | Capture what you learned this session | Anyone |
 
-## How It Works
+## How It Works — Step by Step
+
+Don't worry if you've never used a terminal before. Bug Shepherd guides you through everything. Here's the complete flow, with **you in control at every decision point**:
 
 ```
-Your Bug Tracker (Jira / Linear / GitHub Issues)
-        |
-        v
-  /shepherd-sync        ← Pull bugs into local backlog
-        |
-        v
-  /shepherd-triage      ← Parallel agents check reproducibility
-        |                  on your live site using Playwright
-        v
-  HUMAN REVIEW GATE     ← You approve/reject each finding
-        |
-        v
-  Bulk update tracker   ← Close non-reproducible, flag confirmed
-        |
-        v
-  /shepherd-start {ID}  ← Pick a confirmed bug, investigate
-        |
-        v
-  /shepherd-review      ← Quality gate before shipping fix
-        |
-        v
-  /shepherd-learn       ← Capture lessons for next time
+STEP 1: SYNC YOUR BACKLOG
+┌─────────────────────────────────────────────────────────┐
+│  Your Bug Tracker                                       │
+│  (Jira / Linear / GitHub Issues)                        │
+│                                                         │
+│  240 open bugs, scattered across sprints,               │
+│  some from 6 months ago, some from yesterday            │
+└────────────────────────┬────────────────────────────────┘
+                         │
+                    You type:
+                  /shepherd-sync
+                         │
+                         v
+┌─────────────────────────────────────────────────────────┐
+│  Local Backlog (backlog-live.md)                        │
+│                                                         │
+│  All bugs in one place, sorted by age,                  │
+│  with status and priority visible at a glance           │
+└────────────────────────┬────────────────────────────────┘
+                         │
+STEP 2: MASS TRIAGE      │
+                    You type:
+                 /shepherd-triage
+                         │
+                         v
+┌─────────────────────────────────────────────────────────┐
+│  5 AI Agents Launch in Parallel                         │
+│                                                         │
+│  Agent 1: Checking bugs 1-6    ───> Live site           │
+│  Agent 2: Checking bugs 7-12   ───> Live site           │
+│  Agent 3: Checking bugs 13-18  ───> Live site           │
+│  Agent 4: Checking bugs 19-24  ───> Live site           │
+│  Agent 5: Checking bugs 25-30  ───> Live site           │
+│                                                         │
+│  Each agent visits the page, follows the steps,         │
+│  and takes screenshots as evidence.                     │
+└────────────────────────┬────────────────────────────────┘
+                         │
+                         v
+┌─────────────────────────────────────────────────────────┐
+│  *** HUMAN IN THE LOOP — YOUR DECISION ***              │
+│                                                         │
+│  Results are shown in 4 categories:                     │
+│                                                         │
+│  ✅ Auto-Cancel (3)     — Old domain bugs, safe to close│
+│  👀 Needs Your Review (18) — Agent unsure, you decide   │
+│  🔴 Still Broken (7)    — Confirmed on live site        │
+│  ❓ Inconclusive (2)    — Couldn't reach a verdict      │
+│                                                         │
+│  YOU approve each category. Nothing happens without     │
+│  your explicit "go ahead."                              │
+└────────────────────────┬────────────────────────────────┘
+                         │
+STEP 3: FIX A BUG        │  (You or a developer)
+                    You type:
+              /shepherd-start BUG-1234
+                         │
+                         v
+┌─────────────────────────────────────────────────────────┐
+│  Session Briefing                                       │
+│                                                         │
+│  - Full bug details pulled from tracker                 │
+│  - Past lessons loaded ("last time this pattern         │
+│    needed X, not Y")                                    │
+│  - Investigation checklist generated                    │
+│  - YOU decide: reproduce, investigate, or delegate      │
+└────────────────────────┬────────────────────────────────┘
+                         │
+                         v
+┌─────────────────────────────────────────────────────────┐
+│  *** HUMAN IN THE LOOP — FIX APPROVAL ***               │
+│                                                         │
+│  Before any code is written:                            │
+│  - Root cause is explained in plain language             │
+│  - Proposed fix is described (not just code diff)        │
+│  - YOU approve the approach                             │
+└────────────────────────┬────────────────────────────────┘
+                         │
+STEP 4: QUALITY CHECK     │
+                    You type:
+               /shepherd-review
+                         │
+                         v
+┌─────────────────────────────────────────────────────────┐
+│  Quality Gate                                           │
+│                                                         │
+│  - Is the change minimal? (flag if too many lines)      │
+│  - Does it only touch what's needed?                    │
+│  - Does it follow past lessons?                         │
+│  - Linting and type checks pass?                        │
+│                                                         │
+│  Verdict: PASS / WARN / BLOCK                           │
+│  YOU decide whether to ship it                          │
+└────────────────────────┬────────────────────────────────┘
+                         │
+STEP 5: LEARN             │
+                    You type:
+               /shepherd-learn
+                         │
+                         v
+┌─────────────────────────────────────────────────────────┐
+│  Institutional Memory                                   │
+│                                                         │
+│  Lesson captured: "This type of bug happens because..." │
+│  Next time, the system loads this lesson automatically. │
+│  Your team gets smarter with every session.             │
+└─────────────────────────────────────────────────────────┘
 ```
+
+### The Golden Rule: You're Always in Control
+
+Every step that modifies your bug tracker requires **your explicit approval**. Bug Shepherd automates the tedious work (syncing, checking, categorizing) but never makes decisions for you. This isn't just a philosophy; it's a safety rule [born from a real incident](docs/SAFETY-RULES.md) where automated cancellation went wrong.
 
 ## Why This Exists
 
@@ -68,7 +159,7 @@ Bug Shepherd gives you:
 
 ```bash
 # Clone into your project
-git clone https://github.com/YOUR_USERNAME/bug-shepherd.git
+git clone https://github.com/mshadmanrahman/bug-shepherd.git
 
 # Run the installer
 cd bug-shepherd

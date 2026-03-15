@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Claude Code Documentation
+    url: https://docs.anthropic.com/en/docs/claude-code
+    about: Official Claude Code docs (for Claude Code setup questions)
+  - name: Discussions
+    url: https://github.com/mshadmanrahman/bug-shepherd/discussions
+    about: Ask questions, share your setup, or show what you built
