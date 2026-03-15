@@ -1,0 +1,119 @@
+# Bug Shepherd Configuration — Full Example
+#
+# This example shows a fully configured setup for a multi-locale web app
+# tracked in Jira. Copy to .claude/triage.config.yaml and customize.
+
+project:
+  name: "My Web App"
+
+  # Bug tracker: jira | linear | github-issues
+  tracker: "jira"
+
+  # Project key in your tracker
+  # Jira: the project prefix (e.g., "PROJ" for PROJ-1234)
+  # Linear: team slug (e.g., "my-team")
+  # GitHub: "owner/repo" format (e.g., "acme/webapp")
+  tracker_project: "PROJ"
+
+  # Live site URL where bugs are reproduced
+  # Use {locale} placeholder for multi-locale sites
+  live_url: "https://myapp.com/{locale}"
+
+  # Locales to test (leave empty for single-locale sites)
+  locales:
+    - "en"
+    - "de"
+    - "fr"
+    - "es"
+    - "ar"      # RTL locale
+
+reproduction:
+  # Tool for automated reproduction checks
+  # "playwright" = Playwright MCP (recommended)
+  # "manual" = skip automation, organize backlog for manual review
+  tool: "playwright"
+
+  # Screen widths to test (pixels)
+  # Typical: desktop, tablet, mobile
+  viewports: [1440, 820, 375]
+
+  # Max seconds per bug during batch triage
+  timeout_per_bug: 30
+
+  # Parallel agents for /shepherd-triage
+  parallel_agents: 5
+
+  # Bugs assigned to each agent
+  bugs_per_agent: 6
+
+safety:
+  # Categories where headless browsers have high false-negative rates.
+  # Bugs matching these keywords ALWAYS go to human review.
+  never_auto_cancel:
+    - "scroll behavior"
+    - "touch interaction"
+    - "animation"
+    - "viewport-dependent"
+    - "RTL"               # Right-to-left layout bugs
+    - "Arabic"            # Specific RTL locale
+    - "drag and drop"
+    - "hover states"
+
+  # High-confidence auto-cancel rules.
+  # Only bugs matching these AND not reproduced can be auto-cancelled.
+  auto_cancel_rules:
+    - pattern: "deprecated-domain"
+      match_field: "description"
+      match_regex: "(old\\.myapp\\.com|legacy\\.myapp\\.com)"
+      description: "Bug filed against deprecated domain that now redirects"
+
+    - pattern: "removed-feature"
+      match_field: "summary"
+      match_regex: "(classic dashboard|v1 editor)"
+      description: "Bug filed against feature removed in Q1 2026"
+
+  # Skip bugs with activity newer than this (days)
+  recent_activity_days: 90
+
+  # Skip bugs that have an active assignee
+  skip_assigned: true
+
+review:
+  # Project-specific code review rules
+  tech_stack_rules:
+    - name: "No console.log in production"
+      check: "grep -rn 'console.log' src/ --include='*.ts' --include='*.tsx' --exclude='*.test.*'"
+      severity: "warn"
+      message: "Remove console.log before merging"
+
+    - name: "No hardcoded secrets"
+      check: "git diff main...HEAD | grep -iE '\\+.*(api_key|secret_key|password)\\s*[:=]'"
+      severity: "block"
+      message: "SECURITY: Remove hardcoded secrets. Use environment variables."
+
+  # Flag PRs with more than this many net lines added
+  max_line_diff: 10
+
+  # Require before/after screenshots in PR description
+  require_evidence: true
+
+team:
+  # Required git email (leave empty to skip check)
+  git_email: "dev@mycompany.com"
+
+  # Your user ID in the tracker
+  # Jira: account ID (e.g., "712020:abc-def-123")
+  # Linear: user ID (UUID)
+  # GitHub: username (e.g., "octocat")
+  assignee_id: ""
+
+  # Sprint detection
+  sprint_detection: "auto"    # "auto" or "manual"
+  sprint_id: ""               # Only if sprint_detection is "manual"
+
+# Tracker-specific overrides
+tracker_config:
+  cloud_id: ""                     # Jira Cloud ID
+  cancelled_label: "cancelled"
+  triage_label: "triaged"
+  bug_type_name: "Bug"

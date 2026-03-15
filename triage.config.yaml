@@ -1,0 +1,107 @@
+# Bug Shepherd Configuration
+# Copy this file to your project's .claude/triage.config.yaml and customize.
+
+project:
+  # Display name for your project (used in reports and logs)
+  name: ""
+
+  # Bug tracker: jira | linear | github-issues
+  tracker: "jira"
+
+  # Project key in your tracker (e.g., "PROJ" for Jira, "team-slug" for Linear)
+  tracker_project: ""
+
+  # Live site URL where bugs are reproduced
+  # Can include {locale} placeholder for multi-locale sites: "https://example.com/{locale}"
+  live_url: ""
+
+  # Locales to test (leave empty for single-locale sites)
+  locales: []
+
+reproduction:
+  # Reproduction tool: playwright | manual
+  # "playwright" uses Playwright MCP for automated checks
+  # "manual" skips automated reproduction and just organizes the backlog
+  tool: "playwright"
+
+  # Viewport widths to test (pixels)
+  viewports: [1440, 820, 375]
+
+  # Maximum time (seconds) to spend reproducing a single bug
+  timeout_per_bug: 30
+
+  # Number of parallel agents for batch triage
+  parallel_agents: 5
+
+  # Bugs per agent in batch triage
+  bugs_per_agent: 6
+
+safety:
+  # Bug categories that should NEVER be auto-cancelled.
+  # Headless browsers have high false-negative rates for these.
+  # Findings in these categories always go to HUMAN REVIEW.
+  never_auto_cancel:
+    - "scroll behavior"
+    - "touch interaction"
+    - "animation"
+    - "viewport-dependent"
+    # Add your own categories:
+    # - "drag and drop"
+    # - "hover states"
+    # - "keyboard navigation"
+
+  # Rules for high-confidence auto-cancellation.
+  # Only bugs matching these patterns can be auto-cancelled without human review.
+  auto_cancel_rules: []
+    # Example: bugs filed against a domain that no longer exists
+    # - pattern: "old-domain"
+    #   match_field: "description"  # Which field to check: summary | description | url
+    #   match_regex: "(olddomain\\.com|legacy\\.example\\.com)"
+    #   description: "Bug filed against deprecated domain that now redirects"
+
+  # Skip bugs with comments or updates newer than this (days).
+  # Prevents cancelling bugs someone is actively investigating.
+  recent_activity_days: 90
+
+  # Skip bugs with an active assignee (someone is working on it)
+  skip_assigned: true
+
+review:
+  # Project-specific code review rules.
+  # These are checked by /shepherd-review before pushing.
+  tech_stack_rules: []
+    # Example rules:
+    # - name: "No direct DB queries in controllers"
+    #   check: "grep -r 'db.query' src/controllers/"
+    #   severity: "block"  # block | warn
+    #   message: "Use the repository layer for database access"
+    #
+    # - name: "No console.log in production code"
+    #   check: "grep -rn 'console.log' src/ --include='*.ts' --exclude='*.test.ts'"
+    #   severity: "warn"
+    #   message: "Remove console.log before merging"
+
+  # Flag PRs where net lines added exceeds this threshold
+  max_line_diff: 10
+
+  # Require before/after evidence (screenshots, recordings)
+  require_evidence: true
+
+team:
+  # Required git email for commits (leave empty to skip check)
+  git_email: ""
+
+  # Your user ID in the bug tracker (for assigning triaged bugs)
+  assignee_id: ""
+
+  # Sprint field name in your tracker (Jira-specific)
+  sprint_field: "sprint"
+
+  # How to identify the current sprint
+  # "auto" = detect from tracker, "manual" = specify sprint_id below
+  sprint_detection: "auto"
+  sprint_id: ""
+
+# Tracker-specific overrides (loaded from adapters/)
+# These are auto-populated by the installer based on your tracker choice.
+tracker_config: {}
