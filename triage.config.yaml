@@ -36,6 +36,10 @@ reproduction:
   # Bugs per agent in batch triage
   bugs_per_agent: 6
 
+  # Triage order: "priority" (highest priority first) or "oldest" (oldest created first)
+  # "priority" ensures critical bugs get checked before low-priority ones
+  triage_order: "priority"
+
 safety:
   # Bug categories that should NEVER be auto-cancelled.
   # Headless browsers have high false-negative rates for these.

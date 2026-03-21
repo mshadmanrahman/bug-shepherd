@@ -37,7 +37,7 @@ STEP 1: SYNC YOUR BACKLOG
 ┌─────────────────────────────────────────────────────────┐
 │  Local Backlog (backlog-live.md)                        │
 │                                                         │
-│  All bugs in one place, sorted by age,                  │
+│  All bugs in one place, sorted by priority then age,    │
 │  with status and priority visible at a glance           │
 └────────────────────────┬────────────────────────────────┘
                          │

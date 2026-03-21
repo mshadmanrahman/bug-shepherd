@@ -46,6 +46,10 @@ reproduction:
   # Bugs assigned to each agent
   bugs_per_agent: 6
 
+  # Triage order: "priority" (highest priority first) or "oldest" (oldest created first)
+  # "priority" ensures P1 blockers get checked before P4 cosmetic bugs
+  triage_order: "priority"
+
 safety:
   # Categories where headless browsers have high false-negative rates.
   # Bugs matching these keywords ALWAYS go to human review.

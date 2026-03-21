@@ -16,6 +16,7 @@ Read `.claude/triage.config.yaml` for:
 - `project.live_url` — where to reproduce
 - `reproduction.parallel_agents` — how many agents to launch (default: 5)
 - `reproduction.bugs_per_agent` — bugs per agent (default: 6)
+- `reproduction.triage_order` — "priority" (default) or "oldest"
 - `safety.*` — all safety rules
 
 ### 2. Auto-Sync Backlog
@@ -24,11 +25,12 @@ If `.claude/backlog-live.md` is older than 24 hours, run `/shepherd-sync` first.
 
 ### 3. Select Bugs to Triage
 
-From `backlog-live.md`, select the oldest untriaged bugs (those not marked "Triaged"):
-- Sort by created date (oldest first)
+From `backlog-live.md`, select untriaged bugs (those not marked "Triaged"):
+- If `triage_order` is "priority" (default): sort by priority first (Highest > High > Medium > Low > Lowest), then by created date (oldest first) within each priority
+- If `triage_order` is "oldest": sort by created date (oldest first), ignoring priority
 - Skip bugs already in triage logs
 - Respect `{count}` parameter
-- Report: "Selected {count} bugs for triage (oldest: {date}, newest: {date})"
+- Report: "Selected {count} bugs for triage (priorities: {P1}xHighest, {P2}xHigh, {P3}xMedium, {P4}xLow; oldest: {date}, newest: {date})"
 
 ### 4. Pre-Triage Safety Filter
 

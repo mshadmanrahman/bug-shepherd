@@ -12,12 +12,14 @@ Patterns for interacting with Jira via the Atlassian MCP server.
 ### Fetch All Open Bugs
 
 ```
-JQL: project = {tracker_project} AND issuetype = Bug AND status NOT IN (Done, Cancelled) ORDER BY created ASC
+JQL: project = {tracker_project} AND issuetype = Bug AND status NOT IN (Done, Cancelled) ORDER BY priority ASC, created ASC
 ```
+
+Note: Jira's `priority ASC` sorts Highest first (1=Highest, 5=Lowest). This ensures the local backlog is pre-sorted by priority for `/shepherd-triage`.
 
 Paginate with max 100 results per page. Continue with:
 ```
-project = {tracker_project} AND issuetype = Bug AND status NOT IN (Done, Cancelled) AND created > "{last_created_date}" ORDER BY created ASC
+project = {tracker_project} AND issuetype = Bug AND status NOT IN (Done, Cancelled) AND created > "{last_created_date}" ORDER BY priority ASC, created ASC
 ```
 
 Use `searchJiraIssuesUsingJql` MCP tool.
