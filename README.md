@@ -268,6 +268,17 @@ bug-shepherd/
     learning-log-example.md
 ```
 
+## Part of the PM Toolkit Family
+
+Open-source tools for PMs who ship with AI:
+
+| Tool | What it does |
+|------|-------------|
+| [PM Pilot](https://github.com/mshadmanrahman/pm-pilot) | 20 skills, 5 agents for product managers using Claude Code |
+| **Bug Shepherd** | **You are here** |
+| [Tech-to-PM Translator](https://github.com/mshadmanrahman/tech-to-pm-translator) | Convert developer docs into PM-friendly knowledge bases |
+| [Morning Digest](https://github.com/mshadmanrahman/morning-digest) | AI-powered daily briefing from calendar, email, and Slack |
+
 ## Contributing
 
 Bug Shepherd was born from real-world pain. If you've triaged bugs and learned something the hard way, contributions are welcome:
