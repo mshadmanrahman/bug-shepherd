@@ -1,31 +1,42 @@
 schemaVersion: 1
-
-identifier: mshadmanrahman/bug-shepherd
-name: Bug Shepherd
+identifier: bug-shepherd
+displayName: Bug Shepherd
 description: "Zero-code bug triage for PMs. Sync, reproduce, and manage bugs without reading a single line of code."
-author: Shadman Rahman
-version: 1.0.0
-license: MIT
+author: "Shadman Rahman"
 
 components:
-  # Commands
-  - command:
+  - id: shepherd-learn
+    description: Learn from past triage decisions to improve future suggestions
+    command:
       source: commands/shepherd-learn.md
       destination: shepherd-learn.md
-  - command:
+
+  - id: shepherd-review
+    description: Review triaged bugs for quality and consistency
+    command:
       source: commands/shepherd-review.md
       destination: shepherd-review.md
-  - command:
+
+  - id: shepherd-start
+    description: Start a new bug triage session
+    command:
       source: commands/shepherd-start.md
       destination: shepherd-start.md
-  - command:
+
+  - id: shepherd-sync
+    description: Sync bugs from issue trackers (GitHub, Jira, Linear)
+    command:
       source: commands/shepherd-sync.md
       destination: shepherd-sync.md
-  - command:
+
+  - id: shepherd-triage
+    description: Triage and prioritize incoming bugs
+    command:
       source: commands/shepherd-triage.md
       destination: shepherd-triage.md
 
-  # Agents
-  - agent:
+  - id: reproduction-checker
+    description: Agent that checks if bugs are reproducible
+    agent:
       source: agents/reproduction-checker.md
       destination: reproduction-checker.md
