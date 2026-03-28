@@ -1,0 +1,31 @@
+schemaVersion: 1
+
+identifier: mshadmanrahman/bug-shepherd
+name: Bug Shepherd
+description: "Zero-code bug triage for PMs. Sync, reproduce, and manage bugs without reading a single line of code."
+author: Shadman Rahman
+version: 1.0.0
+license: MIT
+
+components:
+  # Commands
+  - command:
+      source: commands/shepherd-learn.md
+      destination: shepherd-learn.md
+  - command:
+      source: commands/shepherd-review.md
+      destination: shepherd-review.md
+  - command:
+      source: commands/shepherd-start.md
+      destination: shepherd-start.md
+  - command:
+      source: commands/shepherd-sync.md
+      destination: shepherd-sync.md
+  - command:
+      source: commands/shepherd-triage.md
+      destination: shepherd-triage.md
+
+  # Agents
+  - agent:
+      source: agents/reproduction-checker.md
+      destination: reproduction-checker.md
