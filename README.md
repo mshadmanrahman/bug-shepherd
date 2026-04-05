@@ -1,20 +1,30 @@
 # Bug Shepherd
 
-**Zero-code bug triage for PMs, designers, and anyone who doesn't live in the codebase.**
+You have a bug backlog. It's been sitting there for weeks. Some of those bugs might already be fixed. Some are critical and no one knows it. Most of them are just... there, quietly making you feel behind.
 
-Bug Shepherd is a Claude Code skill that turns your bug backlog into a managed operation. It syncs bugs from your tracker, reproduces them on your live site, builds institutional memory from every session, and enforces human approval gates before any destructive action.
+Bug Shepherd is a Claude Code skill that turns that backlog into a managed operation. It syncs your bugs, checks which ones still exist on your live site, surfaces the ones that matter, and remembers what you learn — session after session.
+
+No code required. No engineering degree needed. Just you, your backlog, and a tool that does the tedious work so you can make the decisions.
 
 Built by a PM who triaged 240+ bugs across 28 locales without writing a single line of product code.
 
+---
+
+New to Claude Code? Start at [claudecodeguide.dev](https://claudecodeguide.dev) first. It takes about 20 minutes and makes everything here much easier.
+
+---
+
 ## What It Does
 
-| Command | Purpose | Who Uses It |
-|---------|---------|-------------|
-| `/shepherd-sync` | Pull open bugs from your tracker into a local backlog | Anyone |
-| `/shepherd-start {ID}` | Begin a focused bug investigation session | PM or developer |
-| `/shepherd-triage` | Mass-check if old bugs still reproduce (parallel agents) | PM |
-| `/shepherd-review` | Quality gate before pushing a fix | Developer |
-| `/shepherd-learn` | Capture what you learned this session | Anyone |
+Each command below is a Claude Code slash command — you type it into Claude Code's chat and it runs. Here's what each one does and when to use it:
+
+| Command | What it does | When to use it |
+|---------|-------------|----------------|
+| `/shepherd-sync` | Pulls all open bugs from your tracker into a single local list, sorted by priority and age | Start here. Do this at the beginning of every triage session. |
+| `/shepherd-triage` | Sends AI agents to check 30 bugs at once against your live site — with screenshots as evidence | Use this when you want to know which bugs still exist before deciding what to fix |
+| `/shepherd-start {ID}` | Opens a focused investigation session for one specific bug, loaded with history and context | Use this when you're ready to dig into a bug — or hand it to a developer with full context |
+| `/shepherd-review` | Runs a quality check before any fix is shipped — flags risky changes, checks patterns | Use this before pushing any fix. It's your last line of defence. |
+| `/shepherd-learn` | Captures what you learned from a session so the system gets smarter next time | Use this at the end of every session. Takes 30 seconds, saves hours later. |
 
 ## How It Works — Step by Step
 
@@ -132,13 +142,31 @@ STEP 5: LEARN             │
 
 ### The Golden Rule: You're Always in Control
 
-Every step that modifies your bug tracker requires **your explicit approval**. Bug Shepherd automates the tedious work (syncing, checking, categorizing) but never makes decisions for you. This isn't just a philosophy; it's a safety rule [born from a real incident](docs/SAFETY-RULES.md) where automated cancellation went wrong.
+Every step that modifies your bug tracker requires **your explicit approval**. Bug Shepherd automates the tedious work — syncing, checking, categorising — but never makes decisions for you. This isn't just a philosophy; it's a safety rule [born from a real incident](docs/SAFETY-RULES.md) where automated cancellation went wrong.
+
+## Your First Session
+
+Here's what the first 30 minutes looks like from zero.
+
+**Minutes 0–5: Install and configure**
+Run the installer (see below). It asks three questions: which tracker you use, your project key, and your live site URL. That's it.
+
+**Minutes 5–10: Sync your backlog**
+Type `/shepherd-sync` in Claude Code. Watch your bugs pull in from Jira, Linear, or GitHub Issues into a single sorted file. You'll see how many you actually have, and what's oldest.
+
+**Minutes 10–20: Run your first triage**
+Type `/shepherd-triage`. Five agents will fan out across your backlog and check bugs against your live site. Get a coffee. Come back to a categorised results view.
+
+**Minutes 20–30: Review the results**
+Bug Shepherd shows you four buckets: safe to close, needs your review, confirmed broken, and inconclusive. You go through each category and approve or push back. Nothing gets closed without you saying so.
+
+By the end of that 30 minutes, you'll know the real state of your backlog — not what the ticket statuses say, but what's actually broken on your site right now.
 
 ## Why This Exists
 
 Most bug triage tools assume you can read the code. Bug Shepherd assumes you can't, and that's the point.
 
-As a PM, you understand the product better than anyone. You know which bugs matter, which ones users complain about, and which ones are stale. But you shouldn't need to read source code to manage a bug backlog.
+As a PM, you understand the product better than anyone. You know which bugs matter, which ones users complain about, and which ones have been sitting there long enough to be stale. But you shouldn't need to read source code to manage a bug backlog.
 
 Bug Shepherd gives you:
 - **Automated reproduction checks** without writing test code
@@ -146,19 +174,19 @@ Bug Shepherd gives you:
 - **Safety gates** learned from real incidents (we once falsely cancelled bugs a developer was actively fixing)
 - **Parallel processing** that triages 30 bugs in 5 minutes
 
-## Quick Start
+## Installation
 
-### Prerequisites
+### What you need before you start
 
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) installed and configured
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) installed. Never done this? Go to [claudecodeguide.dev](https://claudecodeguide.dev) first — it walks you through setup in plain English.
 - A bug tracker: Jira (via Atlassian MCP), Linear, or GitHub Issues
-- [Playwright MCP](https://github.com/anthropics/claude-code/blob/main/docs/mcp.md) for reproduction checks (optional but recommended)
-- A live/staging URL where bugs can be reproduced
+- A live or staging URL where bugs can be reproduced
+- [Playwright MCP](https://github.com/anthropics/claude-code/blob/main/docs/mcp.md) — optional, but recommended if you want automated screenshots
 
-### Installation
+### Run the installer
 
 ```bash
-# Clone into your project
+# Clone the repository
 git clone https://github.com/mshadmanrahman/bug-shepherd.git
 
 # Run the installer
@@ -167,14 +195,15 @@ chmod +x install.sh
 ./install.sh
 ```
 
-The installer will:
-1. Ask which bug tracker you use
-2. Ask for your project key and live URL
-3. Generate a `triage.config.yaml` tailored to your project
-4. Copy commands to your `.claude/commands/` directory
-5. Create template files for your learning log and backlog
+The installer will ask you three questions and set everything up:
 
-### Manual Installation
+1. Which bug tracker do you use? (Jira / Linear / GitHub Issues)
+2. What is your project key? (e.g. `PROJ` in Jira, or your repo name)
+3. What is your live site URL? (e.g. `https://app.yourproduct.com`)
+
+It then generates a config file tailored to your project and copies all the commands to your Claude Code setup.
+
+### Manual installation (if you prefer)
 
 1. Copy `commands/` to your project's `.claude/commands/`
 2. Copy `agents/` to your project's `.claude/agents/`
@@ -184,7 +213,7 @@ The installer will:
 
 ## Configuration
 
-All project-specific settings live in `.claude/triage.config.yaml`:
+All project-specific settings live in `.claude/triage.config.yaml`. The installer generates this for you, but here's what it looks like:
 
 ```yaml
 project:
@@ -212,24 +241,24 @@ team:
   assignee_id: ""                  # Your tracker user ID
 ```
 
-See `examples/triage.config.example.yaml` for a fully commented configuration.
+See `examples/triage.config.example.yaml` for a fully commented version.
 
 ## The Safety Story
 
-On March 10, 2026, our triage system falsely cancelled two bugs that a developer was actively investigating. The developer caught it immediately, but the damage was done: lost context, broken trust, and a lesson learned the hard way.
+On March 10, 2026, the triage system falsely cancelled two bugs that a developer was actively investigating. The developer caught it immediately, but the damage was done: lost context, broken trust, and a lesson learned the hard way.
 
-**What we changed:**
-- Automated cancellation is now restricted to high-confidence cases only (e.g., bugs against domains that no longer exist)
-- All other "not reproduced" findings go to a **HUMAN REVIEW** queue
-- Certain bug categories (scroll, touch, viewport, animation) are **never** auto-cancelled because headless browsers can't reliably reproduce them
+**What changed after that:**
+- Automated cancellation is now restricted to high-confidence cases only (for example, bugs filed against domains that no longer exist)
+- All other "not reproduced" findings go to a human review queue — you decide
+- Certain bug categories (scroll, touch, viewport, animation) are never auto-cancelled, because headless browsers can't reliably reproduce them
 - Bugs with recent activity or an active assignee are always flagged for human review
 
 Read the full story in [docs/SAFETY-RULES.md](docs/SAFETY-RULES.md).
 
 ## Supported Trackers
 
-| Tracker | MCP Required | Status |
-|---------|-------------|--------|
+| Tracker | Setup required | Status |
+|---------|---------------|--------|
 | Jira | [Atlassian MCP](https://modelcontextprotocol.io/integrations/atlassian) | Full support |
 | Linear | Linear MCP | Adapter included |
 | GitHub Issues | Built-in `gh` CLI | Adapter included |
@@ -270,14 +299,17 @@ bug-shepherd/
 
 ## Part of the PM Toolkit Family
 
-Open-source tools for PMs who ship with AI:
+Bug Shepherd is one tool in a set built for PMs using Claude Code. Each one is independent — install what you need.
 
 | Tool | What it does |
 |------|-------------|
-| [PM Pilot](https://github.com/mshadmanrahman/pm-pilot) | 20 skills, 5 agents for product managers using Claude Code |
-| **Bug Shepherd** | **You are here** |
-| [Tech-to-PM Translator](https://github.com/mshadmanrahman/tech-to-pm-translator) | Convert developer docs into PM-friendly knowledge bases |
-| [Morning Digest](https://github.com/mshadmanrahman/morning-digest) | AI-powered daily briefing from calendar, email, and Slack |
+| [pm-pilot](https://github.com/mshadmanrahman/pm-pilot) | Claude Code configured for PMs. Meeting prep, PRDs, market sizing — 25 skills, ready to install. |
+| [tech-to-pm-translator](https://github.com/mshadmanrahman/tech-to-pm-translator) | Turns developer docs into PM language. Structured knowledge bases, not summaries. |
+| [morning-digest](https://github.com/mshadmanrahman/morning-digest) | Your morning briefed in 30 seconds. Calendar, email, Slack, and action items in one digest. |
+| [claudecode-guide](https://github.com/mshadmanrahman/claudecode-guide) | The friendly guide to Claude Code. Zero jargon — from first install to daily operating system. |
+| **bug-shepherd** | **You are here** |
+
+Start at [claudecodeguide.dev](https://claudecodeguide.dev) if you're new to Claude Code.
 
 ## Contributing
 
