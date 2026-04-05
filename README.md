@@ -307,6 +307,7 @@ Bug Shepherd is one tool in a set built for PMs using Claude Code. Each one is i
 | [tech-to-pm-translator](https://github.com/mshadmanrahman/tech-to-pm-translator) | Turns developer docs into PM language. Structured knowledge bases, not summaries. |
 | [morning-digest](https://github.com/mshadmanrahman/morning-digest) | Your morning briefed in 30 seconds. Calendar, email, Slack, and action items in one digest. |
 | [claudecode-guide](https://github.com/mshadmanrahman/claudecode-guide) | The friendly guide to Claude Code. Zero jargon — from first install to daily operating system. |
+| [root-kg](https://github.com/mshadmanrahman/root-kg) | Your knowledge graph. Ask questions across all your notes, meetings, and emails — cited answers in plain English. |
 | **bug-shepherd** | **You are here** |
 
 Start at [claudecodeguide.dev](https://claudecodeguide.dev) if you're new to Claude Code.
