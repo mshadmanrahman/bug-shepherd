@@ -1,5 +1,9 @@
 # Bug Shepherd
 
+<p align="center">
+  <img src="assets/hero.png" alt="Bug Shepherd" width="720" />
+</p>
+
 You have a bug backlog. It's been sitting there for weeks. Some of those bugs might already be fixed. Some are critical and no one knows it. Most of them are just... there, quietly making you feel behind.
 
 Bug Shepherd is a Claude Code skill that turns that backlog into a managed operation. It syncs your bugs, checks which ones still exist on your live site, surfaces the ones that matter, and remembers what you learn — session after session.
