@@ -1,5 +1,7 @@
 # Bug Shepherd
 
+[![GitHub stars](https://img.shields.io/github/stars/mshadmanrahman/bug-shepherd?style=social)](https://github.com/mshadmanrahman/bug-shepherd/stargazers)
+
 <p align="center">
   <img src="assets/hero.png" alt="Bug Shepherd" width="720" />
 </p>
@@ -301,20 +303,26 @@ bug-shepherd/
     learning-log-example.md
 ```
 
-## Part of the PM Toolkit Family
+## Support
 
-Bug Shepherd is one tool in a set built for PMs using Claude Code. Each one is independent — install what you need.
+If this saved you time, give it a star -- it helps others find it and keeps development going.
 
-| Tool | What it does |
-|------|-------------|
-| [pm-pilot](https://github.com/mshadmanrahman/pm-pilot) | Claude Code configured for PMs. Meeting prep, PRDs, market sizing — 25 skills, ready to install. |
-| [tech-to-pm-translator](https://github.com/mshadmanrahman/tech-to-pm-translator) | Turns developer docs into PM language. Structured knowledge bases, not summaries. |
-| [morning-digest](https://github.com/mshadmanrahman/morning-digest) | Your morning briefed in 30 seconds. Calendar, email, Slack, and action items in one digest. |
-| [claudecode-guide](https://github.com/mshadmanrahman/claudecode-guide) | The friendly guide to Claude Code. Zero jargon — from first install to daily operating system. |
-| [root-kg](https://github.com/mshadmanrahman/root-kg) | Your knowledge graph. Ask questions across all your notes, meetings, and emails — cited answers in plain English. |
-| **bug-shepherd** | **You are here** |
+[![GitHub stars](https://img.shields.io/github/stars/mshadmanrahman/bug-shepherd?style=social)](https://github.com/mshadmanrahman/bug-shepherd/stargazers)
+
+---
+
+## See Also
+
+- **[pm-pilot](https://github.com/mshadmanrahman/pm-pilot)** -- Claude Code configured for PMs. 25 skills out of the box.
+- **[root-kg](https://github.com/mshadmanrahman/root-kg)** -- Personal knowledge graph. Ask questions across all your notes, meetings, and emails.
+- **[morning-digest](https://github.com/mshadmanrahman/morning-digest)** -- Your morning briefed in 30 seconds. Calendar, email, Slack, and action items.
+- **[discovery-md](https://github.com/mshadmanrahman/discovery-md)** -- AI product discovery for PMs. From braindump to stakeholder one-pager.
+- **[ceremonies](https://github.com/mshadmanrahman/ceremonies)** -- Agile ceremonies that don't suck. Retros, estimation, team memory.
+- **[claudecode-guide](https://github.com/mshadmanrahman/claudecode-guide)** -- The friendly guide to Claude Code.
 
 Start at [claudecodeguide.dev](https://claudecodeguide.dev) if you're new to Claude Code.
+
+---
 
 ## Contributing
 
