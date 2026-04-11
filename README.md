@@ -8,7 +8,7 @@
 
 You have a bug backlog. It's been sitting there for weeks. Some of those bugs might already be fixed. Some are critical and no one knows it. Most of them are just... there, quietly making you feel behind.
 
-Bug Shepherd is a Claude Code skill that turns that backlog into a managed operation. It syncs your bugs, checks which ones still exist on your live site, surfaces the ones that matter, and remembers what you learn — session after session.
+Bug Shepherd is a Claude Code skill that turns that backlog into a managed operation. It syncs your bugs, checks which ones still exist on your live site, surfaces the ones that matter, and remembers what you learn  - session after session.
 
 No code required. No engineering degree needed. Just you, your backlog, and a tool that does the tedious work so you can make the decisions.
 
@@ -22,17 +22,17 @@ New to Claude Code? Start at [claudecodeguide.dev](https://claudecodeguide.dev) 
 
 ## What It Does
 
-Each command below is a Claude Code slash command — you type it into Claude Code's chat and it runs. Here's what each one does and when to use it:
+Each command below is a Claude Code slash command  - you type it into Claude Code's chat and it runs. Here's what each one does and when to use it:
 
 | Command | What it does | When to use it |
 |---------|-------------|----------------|
 | `/shepherd-sync` | Pulls all open bugs from your tracker into a single local list, sorted by priority and age | Start here. Do this at the beginning of every triage session. |
-| `/shepherd-triage` | Sends AI agents to check 30 bugs at once against your live site — with screenshots as evidence | Use this when you want to know which bugs still exist before deciding what to fix |
-| `/shepherd-start {ID}` | Opens a focused investigation session for one specific bug, loaded with history and context | Use this when you're ready to dig into a bug — or hand it to a developer with full context |
-| `/shepherd-review` | Runs a quality check before any fix is shipped — flags risky changes, checks patterns | Use this before pushing any fix. It's your last line of defence. |
+| `/shepherd-triage` | Sends AI agents to check 30 bugs at once against your live site  - with screenshots as evidence | Use this when you want to know which bugs still exist before deciding what to fix |
+| `/shepherd-start {ID}` | Opens a focused investigation session for one specific bug, loaded with history and context | Use this when you're ready to dig into a bug  - or hand it to a developer with full context |
+| `/shepherd-review` | Runs a quality check before any fix is shipped  - flags risky changes, checks patterns | Use this before pushing any fix. It's your last line of defence. |
 | `/shepherd-learn` | Captures what you learned from a session so the system gets smarter next time | Use this at the end of every session. Takes 30 seconds, saves hours later. |
 
-## How It Works — Step by Step
+## How It Works  - Step by Step
 
 Don't worry if you've never used a terminal before. Bug Shepherd guides you through everything. Here's the complete flow, with **you in control at every decision point**:
 
@@ -77,14 +77,14 @@ STEP 2: MASS TRIAGE      │
                          │
                          v
 ┌─────────────────────────────────────────────────────────┐
-│  *** HUMAN IN THE LOOP — YOUR DECISION ***              │
+│  *** HUMAN IN THE LOOP  - YOUR DECISION ***              │
 │                                                         │
 │  Results are shown in 4 categories:                     │
 │                                                         │
-│  ✅ Auto-Cancel (3)     — Old domain bugs, safe to close│
-│  👀 Needs Your Review (18) — Agent unsure, you decide   │
-│  🔴 Still Broken (7)    — Confirmed on live site        │
-│  ❓ Inconclusive (2)    — Couldn't reach a verdict      │
+│  ✅ Auto-Cancel (3)      - Old domain bugs, safe to close│
+│  👀 Needs Your Review (18)  - Agent unsure, you decide   │
+│  🔴 Still Broken (7)     - Confirmed on live site        │
+│  ❓ Inconclusive (2)     - Couldn't reach a verdict      │
 │                                                         │
 │  YOU approve each category. Nothing happens without     │
 │  your explicit "go ahead."                              │
@@ -107,7 +107,7 @@ STEP 3: FIX A BUG        │  (You or a developer)
                          │
                          v
 ┌─────────────────────────────────────────────────────────┐
-│  *** HUMAN IN THE LOOP — FIX APPROVAL ***               │
+│  *** HUMAN IN THE LOOP  - FIX APPROVAL ***               │
 │                                                         │
 │  Before any code is written:                            │
 │  - Root cause is explained in plain language             │
@@ -148,7 +148,7 @@ STEP 5: LEARN             │
 
 ### The Golden Rule: You're Always in Control
 
-Every step that modifies your bug tracker requires **your explicit approval**. Bug Shepherd automates the tedious work — syncing, checking, categorising — but never makes decisions for you. This isn't just a philosophy; it's a safety rule [born from a real incident](docs/SAFETY-RULES.md) where automated cancellation went wrong.
+Every step that modifies your bug tracker requires **your explicit approval**. Bug Shepherd automates the tedious work  - syncing, checking, categorising  - but never makes decisions for you. This isn't just a philosophy; it's a safety rule [born from a real incident](docs/SAFETY-RULES.md) where automated cancellation went wrong.
 
 ## Your First Session
 
@@ -166,7 +166,7 @@ Type `/shepherd-triage`. Five agents will fan out across your backlog and check 
 **Minutes 20–30: Review the results**
 Bug Shepherd shows you four buckets: safe to close, needs your review, confirmed broken, and inconclusive. You go through each category and approve or push back. Nothing gets closed without you saying so.
 
-By the end of that 30 minutes, you'll know the real state of your backlog — not what the ticket statuses say, but what's actually broken on your site right now.
+By the end of that 30 minutes, you'll know the real state of your backlog  - not what the ticket statuses say, but what's actually broken on your site right now.
 
 ## Why This Exists
 
@@ -184,10 +184,10 @@ Bug Shepherd gives you:
 
 ### What you need before you start
 
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) installed. Never done this? Go to [claudecodeguide.dev](https://claudecodeguide.dev) first — it walks you through setup in plain English.
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) installed. Never done this? Go to [claudecodeguide.dev](https://claudecodeguide.dev) first  - it walks you through setup in plain English.
 - A bug tracker: Jira (via Atlassian MCP), Linear, or GitHub Issues
 - A live or staging URL where bugs can be reproduced
-- [Playwright MCP](https://github.com/anthropics/claude-code/blob/main/docs/mcp.md) — optional, but recommended if you want automated screenshots
+- [Playwright MCP](https://github.com/anthropics/claude-code/blob/main/docs/mcp.md)  - optional, but recommended if you want automated screenshots
 
 ### Run the installer
 
@@ -255,7 +255,7 @@ On March 10, 2026, the triage system falsely cancelled two bugs that a developer
 
 **What changed after that:**
 - Automated cancellation is now restricted to high-confidence cases only (for example, bugs filed against domains that no longer exist)
-- All other "not reproduced" findings go to a human review queue — you decide
+- All other "not reproduced" findings go to a human review queue  - you decide
 - Certain bug categories (scroll, touch, viewport, animation) are never auto-cancelled, because headless browsers can't reliably reproduce them
 - Bugs with recent activity or an active assignee are always flagged for human review
 
