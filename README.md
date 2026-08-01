@@ -1,3 +1,18 @@
+> ## This repo has moved
+>
+> It now ships as the **`bug-shepherd`** plugin inside [**PM Pilot**](https://github.com/mshadmanrahman/pm-pilot):
+>
+> ```bash
+> claude plugin marketplace add mshadmanrahman/pm-pilot
+> claude plugin install bug-shepherd@pm-pilot
+> ```
+>
+> One install surface instead of a repo per skill. The move also fixed dead file paths that broke this skill's bundled reference files for anyone who followed the old install instructions.
+>
+> This repo is archived and read-only. The content below is preserved for reference.
+
+---
+
 # Bug Shepherd
 
 [![GitHub stars](https://img.shields.io/github/stars/mshadmanrahman/bug-shepherd?style=social)](https://github.com/mshadmanrahman/bug-shepherd/stargazers)
